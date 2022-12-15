@@ -30,7 +30,6 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     const newDateMs = selectedDates[0].getTime();
-    calc(newDateMs);
   },
 };
 
@@ -38,50 +37,42 @@ btnStart.setAttribute('disabled', 'disabled');
 
 flatpickr(inputTime, options);
 
-function calc(newDateMs) {
+btnStart.addEventListener('click', calc);
+
+function calc() {
   let thisDate = new Date();
   let thisDateMs = thisDate.getTime();
   let diff = newDateMs - thisDateMs;
   if (diff > 0) {
     btnStart.removeAttribute('disabled');
-    timer = setInterval(() => {
-      thisDate = new Date();
-      thisDateMs = thisDate.getTime();
-      diff = newDateMs - thisDateMs;
-      convertMs(diff);
-    }, 1000);
+    // timer = setInterval(() => {
+    //   thisDate = new Date();
+    //   thisDateMs = thisDate.getTime();
+    //   diff = newDateMs - thisDateMs;
+    //   convertMs(diff);
+    // }, 1000);
   } else {
     clearTimeout(timer);
     window.alert(`Please choose a date in the future`);
   }
 }
 
-function convertMs(diff) {
-  // Number of milliseconds per unit of time
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
-
-  // Remaining days
-  const days = Math.floor(diff / day);
-  // Remaining hours
-  const hours = Math.floor((diff % day) / hour);
-  // Remaining minutes
-  const minutes = Math.floor(((diff % day) % hour) / minute);
-  // Remaining seconds
-  const seconds = Math.floor((((diff % day) % hour) % minute) / second);
-
-  daysEl.textContent = days;
-  hoursEl.textContent = hours;
-  minutesEl.textContent = minutes;
-  secondsEl.textContent = seconds;
-}
-
-btnStart.addEventListener('click', temp);
-
-function temp() {
-  //   timer = setInterval(() => {
-  //     convertMs(100000);
-  //   }, 1000);
-}
+// function convertMs(diff) {
+//   // Number of milliseconds per unit of time
+//   const second = 1000;
+//   const minute = second * 60;
+//   const hour = minute * 60;
+//   const day = hour * 24;
+//   // Remaining days
+//   const days = Math.floor(diff / day);
+//   // Remaining hours
+//   const hours = Math.floor((diff % day) / hour);
+//   // Remaining minutes
+//   const minutes = Math.floor(((diff % day) % hour) / minute);
+//   // Remaining seconds
+//   const seconds = Math.floor((((diff % day) % hour) % minute) / second);
+//   daysEl.textContent = days;
+//   hoursEl.textContent = hours;
+//   minutesEl.textContent = minutes;
+//   secondsEl.textContent = seconds;
+// }
