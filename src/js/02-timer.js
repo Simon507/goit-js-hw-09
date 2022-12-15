@@ -8,6 +8,7 @@ const hoursEl = document.querySelector('[data-hours]');
 const minutesEl = document.querySelector('[data-minutes]');
 const secondsEl = document.querySelector('[data-seconds]');
 
+let timer = null;
 // console.log('getFullYear(): ', thisDate.getFullYear());
 // console.log('getDate(): ', thisDate.getDate());
 
@@ -43,13 +44,14 @@ function calc(newDateMs) {
   let diff = newDateMs - thisDateMs;
   if (diff > 0) {
     btnStart.removeAttribute('disabled');
-    timerId = setInterval(() => {
+    timer = setInterval(() => {
       thisDate = new Date();
       thisDateMs = thisDate.getTime();
       diff = newDateMs - thisDateMs;
       convertMs(diff);
     }, 1000);
   } else {
+    clearTimeout(timer);
     window.alert(`Please choose a date in the future`);
   }
 }
@@ -79,7 +81,7 @@ function convertMs(diff) {
 btnStart.addEventListener('click', temp);
 
 function temp() {
-  //   timerId = setInterval(() => {
+  //   timer = setInterval(() => {
   //     convertMs(100000);
   //   }, 1000);
 }

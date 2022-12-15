@@ -19,13 +19,13 @@ function changeStatus() {
 }
 
 btnStart.addEventListener('click', () => {
-  timerId = setInterval(() => {
+  timer = setInterval(() => {
     changeColor();
   }, 1000);
   changeStatus();
 });
 
 btnStop.addEventListener('click', () => {
-  clearInterval(timerId);
+  clearInterval(timer);
   changeStatus();
 });
