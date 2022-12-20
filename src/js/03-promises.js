@@ -9,35 +9,32 @@ form.addEventListener('submit', startPromise);
 
 function startPromise(evt) {
   evt.preventDefault();
-  let promiseValue = {
-    position: '',
-    delay: '',
-  };
   let delay = Number(delayEl.value);
   for (let i = 1; i <= amountEl.value; i++) {
     const position = i;
-    promiseValue.position = position;
-    promiseValue.delay = delay;
-    console.log(promiseValue);
-
-    createPromise(promiseValue);
-
+    createPromise({ position, delay });
     delay = delay + Number(stepEl.value);
   }
 }
 
-function createPromise(promiseValue) {
+function createPromise({ position, delay }) {
   const shouldResolve = Math.random() > 0.3;
 
-  setTimeout(() => {
-    if (shouldResolve) {
-      // Fulfill
-      Notify.success(`Promise # ${promiseValue.position} is OK`);
-      console.log(`delay is ${promiseValue.delay}`);
-    } else {
-      Notify.failure(`Promise # ${promiseValue.position} is'nt OK`);
-      console.log(`delay is ${promiseValue.delay}`);
-      // Reject
-    }
-  }, promiseValue.delay);
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (shouldResolve) {
+        resolve(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      } else {
+        reject(`❌ Rejected promise ${position} in ${delay}ms`);
+      }
+    }, delay);
+  });
+
+  promise
+    .then(value => {
+      Notify.success(value);
+    })
+    .catch(error => {
+      Notify.failure(error);
+    });
 }
