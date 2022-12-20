@@ -8,7 +8,7 @@ const daysEl = document.querySelector('[data-days]');
 const hoursEl = document.querySelector('[data-hours]');
 const minutesEl = document.querySelector('[data-minutes]');
 const secondsEl = document.querySelector('[data-seconds]');
-DATE_KEY = 'newDate';
+const DATE_KEY = 'newDate';
 
 let timer = null;
 
