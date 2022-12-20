@@ -17,7 +17,7 @@ const inputTime = document.getElementById('datetime-picker');
 const options = {
   enableTime: true,
   time_24hr: true,
-  dateFormat: 'd-m-Y    H:i',
+  // dateFormat: 'd-m-Y    H:i',
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
